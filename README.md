@@ -127,7 +127,7 @@ graph TD
         E1 --> F1(Final Structured Document)
         A1 --> D1  
         B1 -.-> F1 
-    end
+    
 ```
 ### File Reading Logic
 ```mermaid
@@ -142,7 +142,7 @@ graph TD
         D2 --> H2
         E2 --> H2
         F2 --> H2
-    end
+    
 ```
 ### Download Options
 ```mermaid
@@ -153,7 +153,7 @@ graph TD
         D3 --> E3[Download .docx]
         B3 -->|PDF| F3[markdown_to_pdf]
         F3 --> G3[Download .pdf]
-    end
+    
 ```
 ### Session Reset
 ```mermaid
@@ -162,7 +162,7 @@ graph TD
         B4 -->|Yes| C4[Clear st.session_state.processed_result]
         C4 --> D4[st.rerun]
         B4 -->|No| E4[Continue with Existing Session]
-    end
+    
 ```
 ### Filename Generation
 ```mermaid
@@ -173,5 +173,5 @@ graph TD
         C5 --> E5[Construct Filename: YYYY-MM-DD_Transcript_Analysis]
         D5 --> E5
         E5 --> F5[Download Buttons]
-    end
+    
 ```
