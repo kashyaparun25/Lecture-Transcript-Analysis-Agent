@@ -93,85 +93,81 @@ The code is organized into several key components:
 ## Mermaid Diagrams
 
 ### Process Flow
-```meremaid
+```mermaid
 %% Main Process Flow
 graph TD
-    A[Start] --> B{User Uploads Transcript(s)};
-    B -- Yes --> C[Read File(s)];
-    B -- No --> J[End];
-    C --> D{Determine File Type};
-    D -- .pdf --> E[Read PDF];
-    D -- .docx --> F[Read DOCX];
-    D -- .txt --> G[Read TXT];
-    D -- .vtt --> H[Read VTT];
-    E --> I[Combine Text];
-    F --> I;
-    G --> I;
-    H --> I;
-    I --> K[Initialize TranscriptProcessor];
-    K --> L[Create CrewAI Agents];
-    L --> M[Define CrewAI Tasks];
-    M --> N[Create Crew];
-    N --> O[Run Crew (Sequential Process)];
-    O --> P[Post-process (Remove Pharmaceutical References)];
-    P --> Q[Display Results];
-    Q --> R[Download Options (MD, DOCX, PDF)];
-     R --> J;
+    A[Start] --> B{User Uploads Transcript(s)}
+    B -- Yes --> C[Read File(s)]
+    B -- No --> J[End]
+    C --> D{Determine File Type}
+    D -- .pdf --> E[Read PDF]
+    D -- .docx --> F[Read DOCX]
+    D -- .txt --> G[Read TXT]
+    D -- .vtt --> H[Read VTT]
+    E --> I[Combine Text]
+    F --> I
+    G --> I
+    H --> I
+    I --> K[Initialize TranscriptProcessor]
+    K --> L[Create CrewAI Agents]
+    L --> M[Define CrewAI Tasks]
+    M --> N[Create Crew]
+    N --> O[Run Crew (Sequential Process)]
+    O --> P[Post-process (Remove Pharmaceutical References)]
+    P --> Q[Display Results]
+    Q --> R[Download Options (MD, DOCX, PDF)]
+    R --> J
 
 %% CrewAI Agent Interaction
-graph LR
-    subgraph CrewAI Interaction
-    A[Content Analyzer] --> B(Initial Analysis);
-    B --> C[Quote Extractor];
-    C --> D(Themes and Briefing);
-    D --> E[Content Writer];
-    E --> F(Final Structured Document);
-    A --> D;  % Direct link for some shared information
-    B -.-> F; % Dotted link to show indirect influence
-    end
+subgraph CrewAI_Interaction
+    A1[Content Analyzer] --> B1(Initial Analysis)
+    B1 --> C1[Quote Extractor]
+    C1 --> D1(Themes and Briefing)
+    D1 --> E1[Content Writer]
+    E1 --> F1(Final Structured Document)
+    A1 --> D1  %% Direct link for some shared information
+    B1 -.-> F1 %% Dotted link to show indirect influence
+end
 
 %% File Reading Logic
-graph TD
-    subgraph File Reading
-    A1[Input File] --> B1{Determine File Type};
-    B1 -- .pdf --> C1[read_pdf];
-    B1 -- .docx --> D1[read_docx];
-    B1 -- .txt --> E1[read_txt];
-    B1 -- .vtt --> F1[read_vtt];
-    B1 -- Other --> G1[Error: Unsupported File Type];
-    C1 --> H1[Extracted Text];
-    D1 --> H1;
-    E1 --> H1;
-    F1 --> H1;
-    end
+subgraph File_Reading
+    A2[Input File] --> B2{Determine File Type}
+    B2 -- .pdf --> C2[read_pdf]
+    B2 -- .docx --> D2[read_docx]
+    B2 -- .txt --> E2[read_txt]
+    B2 -- .vtt --> F2[read_vtt]
+    B2 -- Other --> G2[Error: Unsupported File Type]
+    C2 --> H2[Extracted Text]
+    D2 --> H2
+    E2 --> H2
+    F2 --> H2
+end
 
 %% Download Options
-graph TD
-    subgraph Download
-    A2[Processed Markdown] --> B2{User chooses download format}
-    B2 -- Markdown --> C2[Download .md]
-    B2 -- Word --> D2[markdown_to_docx]
-    D2 --> E2[Download .docx]
-    B2 -- PDF --> F2[markdown_to_pdf]
-    F2 --> G2[Download .pdf]
-    end
+subgraph Download
+    A3[Processed Markdown] --> B3{User chooses download format}
+    B3 -- Markdown --> C3[Download .md]
+    B3 -- Word --> D3[markdown_to_docx]
+    D3 --> E3[Download .docx]
+    B3 -- PDF --> F3[markdown_to_pdf]
+    F3 --> G3[Download .pdf]
+end
 
 %% Session Reset
-graph TD
-    subgraph Session Reset
-    A3[User Interacts] --> B3{Reset Button Clicked?};
-    B3 -- Yes --> C3[Clear st.session_state.processed_result];
-    C3 --> D3[st.rerun()];
-    B3 -- No --> E3[Continue with Existing Session];
-    end
+subgraph Session_Reset
+    A4[User Interacts] --> B4{Reset Button Clicked?}
+    B4 -- Yes --> C4[Clear st.session_state.processed_result]
+    C4 --> D4[st.rerun()]
+    B4 -- No --> E4[Continue with Existing Session]
+end
 
 %% Filename Generation
-graph TD
-    subgraph Filename
-    A4[Uploaded Files] --> B4{Extract Date from Filename};
-    B4 -- Date Found --> C4[Use Extracted Date];
-    B4 -- Date Not Found --> D4[Use Current Date];
-    C4 --> E4[Construct Filename: YYYY-MM-DD_Transcript_Analysis];
-    D4 --> E4;
-    E4 --> F4[Download Buttons];
-    end
+subgraph Filename
+    A5[Uploaded Files] --> B5{Extract Date from Filename}
+    B5 -- Date Found --> C5[Use Extracted Date]
+    B5 -- Date Not Found --> D5[Use Current Date]
+    C5 --> E5[Construct Filename: YYYY-MM-DD_Transcript_Analysis]
+    D5 --> E5
+    E5 --> F5[Download Buttons]
+end
+```
