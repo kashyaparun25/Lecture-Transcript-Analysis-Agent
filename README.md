@@ -119,5 +119,52 @@ graph TD
      R --> J;
 ```
 
+## CrewAI Agent Interaction
+graph LR
+    A[Content Analyzer] --> B(Initial Analysis);
+    B --> C[Quote Extractor];
+    C --> D(Themes and Briefing);
+    D --> E[Content Writer];
+    E --> F(Final Structured Document);
+    A --> D;  % Direct link for some shared information
+    B -.-> F; % Dotted link to show indirect influence
+
+## File Reading Logic
+graph TD
+    A[Input File] --> B{Determine File Type};
+    B -- .pdf --> C[read_pdf];
+    B -- .docx --> D[read_docx];
+    B -- .txt --> E[read_txt];
+    B -- .vtt --> F[read_vtt];
+    B -- Other --> G[Error: Unsupported File Type];
+    C --> H[Extracted Text];
+    D --> H;
+    E --> H;
+    F --> H;
+
+    
+## Download Options
+graph TD
+  A[Processed Markdown] --> B{User chooses download format}
+  B -- Markdown --> C[Download .md]
+  B -- Word --> D[markdown_to_docx]
+  D --> E[Download .docx]
+  B -- PDF --> F[markdown_to_pdf]
+  F --> G[Download .pdf]
 
 
+## Session Reset Logic
+graph TD
+    A[User Interacts] --> B{Reset Button Clicked?};
+    B -- Yes --> C[Clear st.session_state.processed_result];
+    C --> D[st.rerun()];
+    B -- No --> E[Continue with Existing Session];
+
+## Filename Generation
+graph TD
+    A[Uploaded Files] --> B{Extract Date from Filename};
+    B -- Date Found --> C[Use Extracted Date];
+    B -- Date Not Found --> D[Use Current Date];
+    C --> E[Construct Filename: YYYY-MM-DD_Transcript_Analysis];
+    D --> E;
+    E --> F[Download Buttons];
