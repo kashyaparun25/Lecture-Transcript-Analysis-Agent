@@ -96,8 +96,8 @@ The code is organized into several key components:
 
 ```mermaid
 graph TD
-    A[Start] --> B[User Uploads Transcript(s)];
-    B -- Yes --> C[Read File(s)];
+    A[Start] --> B[User Uploads Transcripts];
+    B -- Yes --> C[Read Files];
     B -- No --> J[End];
     C --> D{Determine File Type};
     D -- .pdf --> E[Read PDF];
