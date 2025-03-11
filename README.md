@@ -118,7 +118,7 @@ graph TD
     Q --> R[Download Options (MD, DOCX, PDF)];
      R --> J;
 ```
-
+```mermaid
 ## CrewAI Agent Interaction
 graph LR
     A[Content Analyzer] --> B(Initial Analysis);
@@ -128,7 +128,8 @@ graph LR
     E --> F(Final Structured Document);
     A --> D;  % Direct link for some shared information
     B -.-> F; % Dotted link to show indirect influence
-
+```
+```mermaid
 ## File Reading Logic
 graph TD
     A[Input File] --> B{Determine File Type};
@@ -141,8 +142,8 @@ graph TD
     D --> H;
     E --> H;
     F --> H;
-
-    
+```
+```mermaid 
 ## Download Options
 graph TD
   A[Processed Markdown] --> B{User chooses download format}
@@ -151,15 +152,16 @@ graph TD
   D --> E[Download .docx]
   B -- PDF --> F[markdown_to_pdf]
   F --> G[Download .pdf]
-
-
+```
+```mermaid
 ## Session Reset Logic
 graph TD
     A[User Interacts] --> B{Reset Button Clicked?};
     B -- Yes --> C[Clear st.session_state.processed_result];
     C --> D[st.rerun()];
     B -- No --> E[Continue with Existing Session];
-
+```
+```mermaid
 ## Filename Generation
 graph TD
     A[Uploaded Files] --> B{Extract Date from Filename};
@@ -168,3 +170,4 @@ graph TD
     C --> E[Construct Filename: YYYY-MM-DD_Transcript_Analysis];
     D --> E;
     E --> F[Download Buttons];
+```
