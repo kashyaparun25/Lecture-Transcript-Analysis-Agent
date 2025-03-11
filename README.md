@@ -95,73 +95,66 @@ The code is organized into several key components:
 ### Process Flow
 ```mermaid
 graph TD
-    A[Start] --> B{User Uploads Transcript};
-    B -->|Yes| C[Read Files];
-    B -->|No| J[End];
-    C --> D{Determine File Type};
-    D -->|.pdf| E[Read PDF];
-    D -->|.docx| F[Read DOCX];
-    D -->|.txt| G[Read TXT];
-    D -->|.vtt| H[Read VTT];
-    E --> I[Combine Text];
-    F --> I;
-    G --> I;
-    H --> I;
-    I --> K[Initialize TranscriptProcessor];
-    K --> L[Create CrewAI Agents];
-    L --> M[Define CrewAI Tasks];
-    M --> N[Create Crew];
-    N --> O[Run Crew];
-    O --> P[Post-process];
-    P --> Q[Display Results];
-    Q --> R[Download Options];
-    R --> J;
-
-    subgraph CrewAI_Interaction
-        A1[Content Analyzer] --> B1[Initial Analysis];
-        B1 --> C1[Quote Extractor];
-        C1 --> D1[Themes and Briefing];
-        D1 --> E1[Content Writer];
-        E1 --> F1[Final Document];
-        A1 --> D1;
-        B1 -.-> F1;
+    A[Start] --> B{Upload}
+    B -->|Yes| C[Read]
+    B -->|No| J[End]
+    C --> D{File Type}
+    D -->|pdf| E[PDF]
+    D -->|docx| F[DOCX]
+    D -->|txt| G[TXT]
+    D -->|vtt| H[VTT]
+    E --> I[Combine]
+    F --> I
+    G --> I
+    H --> I
+    I --> K[Process]
+    K --> L[Agents]
+    L --> M[Tasks]
+    M --> N[Crew]
+    N --> O[Run]
+    O --> P[Post-process]
+    P --> Q[Results]
+    Q --> R[Download]
+    R --> J
+    
+    subgraph Agents
+        A1[Analyzer] --> B1[Analysis]
+        B1 --> C1[Extractor]
+        C1 --> D1[Themes]
+        D1 --> E1[Writer]
+        E1 --> F1[Document]
     end
-
-    subgraph File_Reading
-        A2[Input File] --> B2{File Type};
-        B2 -->|.pdf| C2[read_pdf];
-        B2 -->|.docx| D2[read_docx];
-        B2 -->|.txt| E2[read_txt];
-        B2 -->|.vtt| F2[read_vtt];
-        B2 -->|Other| G2[Error];
-        C2 --> H2[Extracted Text];
-        D2 --> H2;
-        E2 --> H2;
-        F2 --> H2;
+    
+    subgraph Reading
+        A2[File] --> B2{Type}
+        B2 -->|pdf| C2[read_pdf]
+        B2 -->|docx| D2[read_docx]
+        B2 -->|txt| E2[read_txt]
+        B2 -->|vtt| F2[read_vtt]
+        C2 --> H2[Text]
+        D2 --> H2
+        E2 --> H2
+        F2 --> H2
     end
-
-    subgraph Download
-        A3[Processed Markdown] --> B3{Format Choice};
-        B3 -->|Markdown| C3[Download .md];
-        B3 -->|Word| D3[markdown_to_docx];
-        D3 --> E3[Download .docx];
-        B3 -->|PDF| F3[markdown_to_pdf];
-        F3 --> G3[Download .pdf];
+    
+    subgraph Download_Options
+        A3[Markdown] --> B3{Format}
+        B3 -->|MD| C3[.md]
+        B3 -->|Word| D3[.docx]
+        B3 -->|PDF| F3[.pdf]
     end
-
-    subgraph Session_Reset
-        A4[User Interacts] --> B4{Reset Clicked?};
-        B4 -->|Yes| C4[Clear Session];
-        C4 --> D4[st.rerun()];
-        B4 -->|No| E4[Continue Session];
+    
+    subgraph Reset
+        A4[User] --> B4{Reset?}
+        B4 -->|Yes| C4[Clear]
+        B4 -->|No| E4[Continue]
     end
-
-    subgraph Filename
-        A5[Uploaded Files] --> B5{Extract Date};
-        B5 -->|Found| C5[Use Date];
-        B5 -->|Not Found| D5[Use Today];
-        C5 --> E5[Construct Filename];
-        D5 --> E5;
-        E5 --> F5[Download Buttons];
+    
+    subgraph Filename_Gen
+        A5[Files] --> B5{Date?}
+        B5 -->|Yes| C5[Use]
+        B5 -->|No| D5[Today]
+        C5 --> E5[Name]
+        D5 --> E5
     end
 ```
