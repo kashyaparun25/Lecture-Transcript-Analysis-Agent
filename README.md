@@ -94,10 +94,10 @@ The code is organized into several key components:
 
 ### Process Flow
 
-```mermaid
+%% Main Process Flow
 graph TD
-    A[Start] --> B[User Uploads Transcripts];
-    B -- Yes --> C[Read Files];
+    A[Start] --> B{User Uploads Transcript(s)};
+    B -- Yes --> C[Read File(s)];
     B -- No --> J[End];
     C --> D{Determine File Type};
     D -- .pdf --> E[Read PDF];
@@ -117,10 +117,10 @@ graph TD
     P --> Q[Display Results];
     Q --> R[Download Options (MD, DOCX, PDF)];
      R --> J;
-```
-```mermaid
-## CrewAI Agent Interaction
+
+%% CrewAI Agent Interaction
 graph LR
+    subgraph CrewAI Interaction
     A[Content Analyzer] --> B(Initial Analysis);
     B --> C[Quote Extractor];
     C --> D(Themes and Briefing);
@@ -128,46 +128,50 @@ graph LR
     E --> F(Final Structured Document);
     A --> D;  % Direct link for some shared information
     B -.-> F; % Dotted link to show indirect influence
-```
-```mermaid
-## File Reading Logic
+    end
+
+%% File Reading Logic
 graph TD
-    A[Input File] --> B{Determine File Type};
-    B -- .pdf --> C[read_pdf];
-    B -- .docx --> D[read_docx];
-    B -- .txt --> E[read_txt];
-    B -- .vtt --> F[read_vtt];
-    B -- Other --> G[Error: Unsupported File Type];
-    C --> H[Extracted Text];
-    D --> H;
-    E --> H;
-    F --> H;
-```
-```mermaid 
-## Download Options
+    subgraph File Reading
+    A1[Input File] --> B1{Determine File Type};
+    B1 -- .pdf --> C1[read_pdf];
+    B1 -- .docx --> D1[read_docx];
+    B1 -- .txt --> E1[read_txt];
+    B1 -- .vtt --> F1[read_vtt];
+    B1 -- Other --> G1[Error: Unsupported File Type];
+    C1 --> H1[Extracted Text];
+    D1 --> H1;
+    E1 --> H1;
+    F1 --> H1;
+    end
+
+%% Download Options
 graph TD
-  A[Processed Markdown] --> B{User chooses download format}
-  B -- Markdown --> C[Download .md]
-  B -- Word --> D[markdown_to_docx]
-  D --> E[Download .docx]
-  B -- PDF --> F[markdown_to_pdf]
-  F --> G[Download .pdf]
-```
-```mermaid
-## Session Reset Logic
+    subgraph Download
+    A2[Processed Markdown] --> B2{User chooses download format}
+    B2 -- Markdown --> C2[Download .md]
+    B2 -- Word --> D2[markdown_to_docx]
+    D2 --> E2[Download .docx]
+    B2 -- PDF --> F2[markdown_to_pdf]
+    F2 --> G2[Download .pdf]
+    end
+
+%% Session Reset
 graph TD
-    A[User Interacts] --> B{Reset Button Clicked?};
-    B -- Yes --> C[Clear st.session_state.processed_result];
-    C --> D[st.rerun()];
-    B -- No --> E[Continue with Existing Session];
-```
-```mermaid
-## Filename Generation
+    subgraph Session Reset
+    A3[User Interacts] --> B3{Reset Button Clicked?};
+    B3 -- Yes --> C3[Clear st.session_state.processed_result];
+    C3 --> D3[st.rerun()];
+    B3 -- No --> E3[Continue with Existing Session];
+    end
+
+%% Filename Generation
 graph TD
-    A[Uploaded Files] --> B{Extract Date from Filename};
-    B -- Date Found --> C[Use Extracted Date];
-    B -- Date Not Found --> D[Use Current Date];
-    C --> E[Construct Filename: YYYY-MM-DD_Transcript_Analysis];
-    D --> E;
-    E --> F[Download Buttons];
-```
+    subgraph Filename
+    A4[Uploaded Files] --> B4{Extract Date from Filename};
+    B4 -- Date Found --> C4[Use Extracted Date];
+    B4 -- Date Not Found --> D4[Use Current Date];
+    C4 --> E4[Construct Filename: YYYY-MM-DD_Transcript_Analysis];
+    D4 --> E4;
+    E4 --> F4[Download Buttons];
+    end
