@@ -95,8 +95,8 @@ The code is organized into several key components:
 ### Process Flow
 ```mermaid
 graph TD
-    A[Start] --> B{User Uploads Transcript(s)}
-    B -->|Yes| C[Read File(s)]
+    A[Start] --> B{User Uploads Transcripts}
+    B -->|Yes| C[Read Files]
     B -->|No| J[End]
     C --> D{Determine File Type}
     D -->|pdf| E[Read PDF]
@@ -111,10 +111,10 @@ graph TD
     K --> L[Create CrewAI Agents]
     L --> M[Define CrewAI Tasks]
     M --> N[Create Crew]
-    N --> O[Run Crew (Sequential Process)]
-    O --> P[Post-process (Remove Pharmaceutical References)]
+    N --> O[Run Crew: Sequential Process]
+    O --> P[Post-process: Remove Pharmaceutical References]
     P --> Q[Display Results]
-    Q --> R[Download Options (MD, DOCX, PDF)]
+    Q --> R[Download Options: MD, DOCX, PDF]
     R --> J
 
     subgraph CrewAI_Agents
