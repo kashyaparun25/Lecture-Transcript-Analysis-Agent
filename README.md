@@ -83,7 +83,7 @@ The code is organized into several key components:
     *   `process_transcript(self, transcript_text, speaker_name, progress_bar, status_text)`: This is the main method that orchestrates the transcript processing. It defines the CrewAI tasks, creates the `Crew`, and runs the process. It also includes:
         *   **Progress Updates:**  Updates the Streamlit progress bar and status text to provide feedback to the user.
         *   **Error Handling:**  Uses `try...except` blocks to catch and report errors during processing.
-        *   **Pharmaceutical Reference Removal:** Post-processes the output to remove any remaining mentions of "Pfizer".
+        *   **Pharmaceutical Reference Removal:** Post-processes the output to remove any remaining mentions of Pharmaceutical References
         *   **Detailed Task Descriptions:** Each task has a very specific `description` and `expected_output` to guide the LLM. This is crucial for achieving the desired results. The descriptions explicitly instruct the agents *not* to include any pharmaceutical company references.
 
 *   **Markdown to PDF/DOCX Conversion:** The `markdown_to_pdf` and `markdown_to_docx` functions convert the generated Markdown output to PDF and Word documents, respectively, handling basic styling. They utilize `xhtml2pdf` (for PDF) and `python-docx` (for Word). The DOCX conversion includes specific styling rules for different text elements (titles, headers, quotes, lists, etc.) to ensure a well-formatted output document.
