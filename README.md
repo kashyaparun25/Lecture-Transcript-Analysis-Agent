@@ -93,7 +93,7 @@ The code is organized into several key components:
 ## Mermaid Diagrams
 
 ### Process Flow
-
+```meremaid
 %% Main Process Flow
 graph TD
     A[Start] --> B{User Uploads Transcript(s)};
