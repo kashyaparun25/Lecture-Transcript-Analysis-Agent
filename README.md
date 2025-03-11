@@ -119,7 +119,7 @@ graph TD
 ```
 ### CrewAI Agent Interaction
 ```mermaid
-    subgraph CrewAI_Agents
+    graph LR
         A1[Content Analyzer] --> B1(Initial Analysis)
         B1 --> C1[Quote Extractor]
         C1 --> D1(Themes and Briefing)
@@ -131,7 +131,7 @@ graph TD
 ```
 ### File Reading Logic
 ```mermaid
-    subgraph File_Reading
+    graph TD
         A2[Input File] --> B2{Determine File Type}
         B2 -->|pdf| C2[read_pdf]
         B2 -->|docx| D2[read_docx]
@@ -146,7 +146,7 @@ graph TD
 ```
 ### Download Options
 ```mermaid
-    subgraph Download_Options
+    graph TD
         A3[Processed Markdown] --> B3{Choose Download Format}
         B3 -->|Markdown| C3[Download .md]
         B3 -->|Word| D3[markdown_to_docx]
@@ -157,7 +157,7 @@ graph TD
 ```
 ### Session Reset
 ```mermaid
-    subgraph Session_Reset
+    graph TD
         A4[User Interacts] --> B4{Reset Button Clicked?}
         B4 -->|Yes| C4[Clear st.session_state.processed_result]
         C4 --> D4[st.rerun]
@@ -166,7 +166,7 @@ graph TD
 ```
 ### Filename Generation
 ```mermaid
-    subgraph Filename_Generation
+    graph TD
         A5[Uploaded Files] --> B5{Extract Date from Filename}
         B5 -->|Date Found| C5[Use Extracted Date]
         B5 -->|Date Not Found| D5[Use Current Date]
